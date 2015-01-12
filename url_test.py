@@ -1,12 +1,13 @@
 import unittest
-import pcap, dpkt, os
+import dpkt, os
+from url_extractor import UrlExtractor
 
 
 class TestUrl(unittest.TestCase):
     def setUp(self):
-        f = open(os.path.join('sample_pcaps', 'test.pcap'), 'rb')
+        f = open(os.path.join('sample_pcaps', 'http.cap'), 'rb')
         pcap = dpkt.pcap.Reader(f)
-        eth = [dpkt.ethernet.Ethernet(buf) for ts, buf in pcap]
+        self.eth = [dpkt.ethernet.Ethernet(buf) for ts, buf in pcap]
         f.close()
 
     def test_url_extractor(self):

@@ -1,4 +1,4 @@
-import pcap, dpkt
+import dpkt
 
 class UrlExtractor:
     @staticmethod
