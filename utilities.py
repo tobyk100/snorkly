@@ -1,4 +1,5 @@
 import dpkt
+import socket
 
 
 # Returns parsed request if this is http request, otherwise None
@@ -17,3 +18,10 @@ def extract_url(packet):
     if http is not None:
         uri = http.headers['host'] + http.uri
         return uri
+
+
+
+def extract_dest_ip(packet):
+    dest = packet.data.dst
+    return socket.inet_ntoa(dest)
+
