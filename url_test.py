@@ -1,6 +1,6 @@
 import unittest
 import dpkt, os
-import utilities
+import utilities, bad_traffic
 
 
 class TestUrl(unittest.TestCase):
@@ -20,6 +20,21 @@ class TestUrl(unittest.TestCase):
     def test_url_extractor(self):
         uri = utilities.extract_url(self.eth[3])
         self.assertEqual(uri, 'www.ethereal.com/download.html')
+
+    def test_simple_good_traffic(self):
+        ip = self.eth[0].data
+        tcp = ip.data
+        res = bad_traffic.land_attack(ip, tcp)
+        self.assertEqual(res[0], 0.0)
+
+    def test_simple_bad_traffic(self):
+        ip = self.eth[0].data
+        tcp = ip.data
+        ip.src = ip.dst
+        tcp.sport = tcp.dport
+        res = bad_traffic.land_attack(ip, tcp)
+        self.assertEqual(res[0], 1.0)
+
 
 
 if __name__ == '__main__':
