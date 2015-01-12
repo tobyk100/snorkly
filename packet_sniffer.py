@@ -17,7 +17,8 @@ def test_module2(pkt):
 def __packet_processor(pkt):
     
     #configure feature modules here
-    modules = [urlfeatures.urldetector, urlfeatures.entropy_url, urlfeatures.ipchecker]
+
+    modules = [urlfeatures.urldetector, urlfeatures.entropy_url, urlfeatures.ipchecker, RunHTTPReqInspect]
 
     if type(pkt.data.data) == dpkt.tcp.TCP:
         print pkt
