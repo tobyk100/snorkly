@@ -15,7 +15,7 @@ def test_module2(pkt):
 def __packet_processor(ts,pkt,d):
     
     #configure feature modules here
-    modules = [test_module, test_module2]
+    modules = [RunHTTPReqInspect, test_module2]
 
     tcpPkt=dpkt.tcp.TCP(pkt)
 

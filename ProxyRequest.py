@@ -7,10 +7,14 @@ __author__ = 'Alex Frazer'
 
 import urllib3
 import certifi
+import utilities
 
+def RunHTTPReqInspect(Packet):
+	reqType = get_http_request(packet)
+	if (len(reqType) > 0):
+		Request(http.headers['host'])
 
-def Request(HOST, URL):
-    lURL = URL.lower()
+def Request(HOST):
     lHOST = HOST.lower()
 
     http = urllib3.PoolManager(cert_reqs='CERT_REQUIRED', ca_certs=certifi.where(), )
