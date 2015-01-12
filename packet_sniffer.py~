@@ -18,7 +18,7 @@ def __packet_processor(ts,pkt,d):
     modules = [test_module, test_module2]
 
     tcpPkt=dpkt.tcp.TCP(pkt)
-
+    data=tcpPkt.data
     messages = []
     scores = []
     
