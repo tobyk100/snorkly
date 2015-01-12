@@ -4,6 +4,7 @@ import sys
 import csv
 import math
 import utilities
+import socket
 
 import math, string, sys, fileinput
 
@@ -51,15 +52,25 @@ def entropy_url(pack):
     return (newent, "entropy")
 
 def ipchecker(pack):
-    ip_s = utilities.extract_dest_ip(pack)
+    ip_s = utilities.get_dns_request(pack)
+    
+
+def DNSRequest(HOST):
+    result = socket.getaddrinfo(HOST, 80)
+    for resolvedIP in result:
+        curValue, curMsg = ipAddrchecker(resolvedIP)
+        if (curValue == 0):
+            return curValue, curMsg
+    return 0 , 'good ip'
+
+def ipAddrchecker(IPAddress):
+    
     for ip in bad_ips:
-        if ip[0:-2] in ip_s:
+        if ip[0:-2] in IPAddress:
             return (1.0, "bad ip")
 
     for ip1 in bad_ips1:
-        if ip_s == ip1:
+        if IPAddress == ip1:
             return (1.0, "bad ip")
     return (0.0, "good ip")
-
-
 
