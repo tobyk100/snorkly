@@ -1,4 +1,5 @@
 import dpkt
+import socket
 
 
 # Returns parsed request if this is http request, otherwise None
@@ -17,3 +18,17 @@ def extract_url(packet):
     if http is not None:
         uri = http.headers['host'] + http.uri
         return uri
+
+
+
+def extract_dest_ip(packet):
+    dest = packet.data.dst
+    return socket.inet_ntoa(dest)
+
+
+def get_dns_request(packet):
+	ip = packet.data
+	udp = ip.data
+	if (udp.dport == 53 and len(udp) > 0):
+		dns = dpkt.dns.DNS(udp.data)
+		return dns
