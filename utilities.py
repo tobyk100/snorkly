@@ -20,8 +20,10 @@ def extract_url(packet):
         return uri
 
 
+
 def extract_dest_ip(packet):
     dest = packet.data.dst
+<<<<<<< HEAD
     return socket.inet_ntoa(ip.dst)
 
 def get_dns_request(packet):
@@ -30,3 +32,7 @@ def get_dns_request(packet):
 	if (udp.dport == 53 and len(udp) > 0):
 		dns = dpkt.dns.DNS(udp.data)
 		return dns
+=======
+    return socket.inet_ntoa(dest)
+
+>>>>>>> FETCH_HEAD
